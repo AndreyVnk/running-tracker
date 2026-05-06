@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0f0f0f" />
+<title>Беговой план · 4 недели</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏃%3C/text%3E%3C/svg%3E" />
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --surface-2: #f1efe8;
+    --text: #1a1a1a;
+    --text-secondary: #5f5e5a;
+    --text-tertiary: #888780;
+    --border: rgba(0,0,0,0.12);
+    --border-strong: rgba(0,0,0,0.25);
+    --accent: #185fa5;
+    --accent-bg: #e6f1fb;
+    --success: #0f6e56;
+    --success-bg: #e1f5ee;
+    --warning: #854f0b;
+    --warning-bg: #faeeda;
+    --danger: #993556;
+    --green: #639922;
+    --red: #e24b4a;
+    --amber: #ef9f27;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1a1a1a;
+      --surface: #242424;
+      --surface-2: #2c2c2a;
+      --text: #f5f5f5;
+      --text-secondary: #b4b2a9;
+      --text-tertiary: #888780;
+      --border: rgba(255,255,255,0.1);
+      --border-strong: rgba(255,255,255,0.2);
+      --accent: #85b7eb;
+      --accent-bg: #042c53;
+      --success: #5dcaa5;
+      --success-bg: #04342c;
+      --warning: #efbf27;
+      --warning-bg: #412402;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 4rem;
+  }
+  header {
+    margin-bottom: 1.5rem;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+  }
+  .stat-value {
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.1;
+  }
+  .toolbar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  button, .btn {
+    background: transparent;
+    border: 0.5px solid var(--border-strong);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+  }
+  button:hover, .btn:hover { background: var(--surface-2); }
+  button:active { transform: scale(0.98); }
+  .btn-icon {
+    width: 14px;
+    height: 14px;
+    stroke-width: 2;
+    fill: none;
+    stroke: currentColor;
+  }
+  .week {
+    margin-bottom: 1.75rem;
+  }
+  .week-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .week-title {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  .week-tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .tag-base { background: var(--accent-bg); color: var(--accent); }
+  .tag-peak { background: var(--warning-bg); color: var(--warning); }
+  .tag-test { background: var(--success-bg); color: var(--success); }
+  .workout {
+    background: var(--surface);
+    border: 0.5px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    transition: background 0.2s;
+  }
+  .workout.done {
+    background: var(--surface-2);
+  }
+  .workout-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .check {
+    width: 20px;
+    height: 20px;
+    margin-top: 1px;
+    cursor: pointer;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+  }
+  .workout-meta {
+    flex: 1;
+    min-width: 0;
+  }
+  .workout-type {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 2px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .workout-plan {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+  .fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 0.5px solid var(--border);
+  }
+  .field label {
+    display: block;
+    font-size: 10px;
+    color: var(--text-tertiary);
+    margin-bottom: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  input[type=number], input[type=text], textarea {
+    width: 100%;
+    padding: 7px 9px;
+    border: 0.5px solid var(--border-strong);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.15s;
+  }
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  textarea.note {
+    margin-top: 8px;
+    min-height: 36px;
+    resize: vertical;
+    font-size: 13px;
+  }
+  .footer {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 0.5px solid var(--border);
+    color: var(--text-tertiary);
+    font-size: 12px;
+    text-align: center;
+  }
+  @media (max-width: 480px) {
+    .container { padding: 1rem 0.75rem 3rem; }
+    .stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .stat { padding: 10px 10px; }
+    .stat-value { font-size: 18px; }
+    .stat-label { font-size: 11px; }
+    h1 { font-size: 20px; }
+    .fields { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media print {
+    body { background: white; color: black; }
+    .toolbar, .check { display: none; }
+    .workout { break-inside: avoid; border: 1px solid #ccc; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>🏃 Беговой план · 4 недели</h1>
+    <p class="subtitle">Цель: тест 5 км ~5:35–5:40 · база 5:46/км → 5:35/км</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-label">Выполнено</div>
+      <div class="stat-value" id="done-count">0 / 12</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Объём, км</div>
+      <div class="stat-value" id="total-km">0</div>
+    </div>
+    <div class="stat">
+      <div class="stat-label">Ср. пульс</div>
+      <div class="stat-value" id="avg-hr">—</div>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <button id="export-csv">↓ CSV</button>
+    <button id="export-json">↓ Бэкап JSON</button>
+    <button id="import-json">↑ Импорт JSON</button>
+    <button id="print-btn">🖨 Печать</button>
+    <button id="reset-btn">⟲ Сбросить</button>
+  </div>
+
+  <div id="weeks"></div>
+
+  <div class="footer">
+    Данные хранятся локально в этом браузере. Делай бэкап JSON раз в неделю.
+  </div>
+</div>
+
+<input type="file" id="import-file" accept=".json" style="display:none" />
+
+<script>
+const PLAN = [
+  { week: 1, tag: "База", tagClass: "tag-base", workouts: [
+    { id: "w1t1", type: "Лёгкий", color: "#639922", plan: "5 км · 6:20–6:40 · HR <145" },
+    { id: "w1t2", type: "Ускорения", color: "#e24b4a", plan: "1 км разминка + 6×30 сек @ 4:30–4:40 (отдых 90 сек) + 1 км заминка · ~4 км" },
+    { id: "w1t3", type: "Прогрессия", color: "#ef9f27", plan: "5 км: 6:10 → 6:00 → 5:50 → 5:40 → 5:30" }
+  ]},
+  { week: 2, tag: "Развитие", tagClass: "tag-base", workouts: [
+    { id: "w2t1", type: "Лёгкий", color: "#639922", plan: "6 км · 6:20–6:40 · HR <145" },
+    { id: "w2t2", type: "Ускорения", color: "#e24b4a", plan: "1 км разминка + 8×30 сек @ 4:30 (отдых 90 сек) + 1 км заминка · ~4,5 км" },
+    { id: "w2t3", type: "Темповая", color: "#ef9f27", plan: "5 км стабильно 5:45 · HR не выше 160" }
+  ]},
+  { week: 3, tag: "Пик", tagClass: "tag-peak", workouts: [
+    { id: "w3t1", type: "Лёгкий", color: "#639922", plan: "7 км · 6:25–6:45 · HR <145" },
+    { id: "w3t2", type: "Интервалы", color: "#e24b4a", plan: "1 км разминка + 5×1 мин @ 4:40–4:50 (отдых 2 мин трусцой) + 1 км заминка · ~5 км" },
+    { id: "w3t3", type: "Прогрессия", color: "#ef9f27", plan: "6 км: первые 4 км по 6:00, последние 2 км по 5:30" }
+  ]},
+  { week: 4, tag: "Тест", tagClass: "tag-test", workouts: [
+    { id: "w4t1", type: "Лёгкий", color: "#639922", plan: "4 км · 6:30 · очень легко" },
+    { id: "w4t2", type: "Тонизация", color: "#e24b4a", plan: "1 км разминка + 4×30 сек быстро + 1 км заминка" },
+    { id: "w4t3", type: "ТЕСТ 5 КМ", color: "#ef9f27", plan: "Цель: 5:35–5:40 · первый км 5:40, держать до 4-го, последний на максимуме" }
+  ]}
+];
+
+const STORAGE_KEY = "running-plan-v1";
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+}
+
+function render() {
+  const container = document.getElementById("weeks");
+  container.innerHTML = PLAN.map(w => `
+    <section class="week">
+      <div class="week-header">
+        <span class="week-title">Неделя ${w.week}</span>
+        <span class="week-tag ${w.tagClass}">${w.tag}</span>
+      </div>
+      ${w.workouts.map(wo => {
+        const s = state[wo.id] || {};
+        return `
+          <div class="workout ${s.done ? "done" : ""}" data-id="${wo.id}">
+            <div class="workout-head">
+              <input type="checkbox" class="check" data-id="${wo.id}" ${s.done ? "checked" : ""} aria-label="Выполнено" />
+              <div class="workout-meta">
+                <div class="workout-type"><span class="dot" style="background:${wo.color}"></span>${escapeHtml(wo.type)}</div>
+                <div class="workout-plan">${escapeHtml(wo.plan)}</div>
+              </div>
+            </div>
+            <div class="fields">
+              <div class="field"><label>Дист., км</label><input type="number" step="0.1" inputmode="decimal" data-id="${wo.id}" data-field="km" value="${escapeHtml(s.km || "")}" /></div>
+              <div class="field"><label>Темп ср.</label><input type="text" data-id="${wo.id}" data-field="pace" value="${escapeHtml(s.pace || "")}" placeholder="5:50" /></div>
+              <div class="field"><label>HR ср.</label><input type="number" inputmode="numeric" data-id="${wo.id}" data-field="hr" value="${escapeHtml(s.hr || "")}" /></div>
+              <div class="field"><label>RPE 1–10</label><input type="number" min="1" max="10" inputmode="numeric" data-id="${wo.id}" data-field="rpe" value="${escapeHtml(s.rpe || "")}" /></div>
+            </div>
+            <textarea class="note" data-id="${wo.id}" data-field="note" placeholder="Заметки: погода, самочувствие, что получилось…">${escapeHtml(s.note || "")}</textarea>
+          </div>
+        `;
+      }).join("")}
+    </section>
+  `).join("");
+
+  bindEvents();
+  updateStats();
+}
+
+function updateStats() {
+  const all = PLAN.flatMap(w => w.workouts);
+  let done = 0, kmSum = 0, hrSum = 0, hrCount = 0;
+  all.forEach(wo => {
+    const s = state[wo.id] || {};
+    if (s.done) done++;
+    const km = parseFloat(s.km);
+    if (!isNaN(km)) kmSum += km;
+    const hr = parseInt(s.hr);
+    if (!isNaN(hr)) { hrSum += hr; hrCount++; }
+  });
+  document.getElementById("done-count").textContent = `${done} / ${all.length}`;
+  document.getElementById("total-km").textContent = kmSum.toFixed(1);
+  document.getElementById("avg-hr").textContent = hrCount ? Math.round(hrSum / hrCount) : "—";
+}
+
+function bindEvents() {
+  document.querySelectorAll(".check").forEach(cb => {
+    cb.addEventListener("change", e => {
+      const id = e.target.dataset.id;
+      state[id] = state[id] || {};
+      state[id].done = e.target.checked;
+      save();
+      const card = document.querySelector(`.workout[data-id="${id}"]`);
+      if (card) card.classList.toggle("done", e.target.checked);
+      updateStats();
+    });
+  });
+  document.querySelectorAll("input[data-field], textarea[data-field]").forEach(inp => {
+    inp.addEventListener("change", e => {
+      const id = e.target.dataset.id;
+      const f = e.target.dataset.field;
+      state[id] = state[id] || {};
+      state[id][f] = e.target.value;
+      save();
+      updateStats();
+    });
+  });
+}
+
+document.getElementById("reset-btn").addEventListener("click", () => {
+  if (confirm("Сбросить весь прогресс? Сначала экспортируй бэкап если нужно.")) {
+    state = {};
+    save();
+    render();
+  }
+});
+
+document.getElementById("export-csv").addEventListener("click", () => {
+  const rows = [["Неделя","Тренировка","План","Выполнено","Дистанция","Темп","HR","RPE","Заметки"]];
+  PLAN.forEach(w => {
+    w.workouts.forEach(wo => {
+      const s = state[wo.id] || {};
+      rows.push([w.week, wo.type, wo.plan, s.done ? "да" : "нет", s.km || "", s.pace || "", s.hr || "", s.rpe || "", s.note || ""]);
+    });
+  });
+  const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
+  download("running-plan.csv", "\uFEFF" + csv, "text/csv;charset=utf-8");
+});
+
+document.getElementById("export-json").addEventListener("click", () => {
+  const backup = { exported: new Date().toISOString(), data: state };
+  download(`running-plan-backup-${new Date().toISOString().slice(0,10)}.json`, JSON.stringify(backup, null, 2), "application/json");
+});
+
+document.getElementById("import-json").addEventListener("click", () => {
+  document.getElementById("import-file").click();
+});
+
+document.getElementById("import-file").addEventListener("change", e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const parsed = JSON.parse(ev.target.result);
+      const data = parsed.data || parsed;
+      if (typeof data !== "object" || data === null) throw new Error("Bad format");
+      if (confirm("Заменить текущие данные импортированными?")) {
+        state = data;
+        save();
+        render();
+      }
+    } catch (err) {
+      alert("Не удалось прочитать файл: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = "";
+});
+
+document.getElementById("print-btn").addEventListener("click", () => window.print());
+
+function download(filename, content, type) {
+  const blob = new Blob([content], { type });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+render();
+</script>
+</body>
+</html>
