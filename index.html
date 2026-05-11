@@ -22,10 +22,11 @@
     --success-bg: #e1f5ee;
     --warning: #854f0b;
     --warning-bg: #faeeda;
-    --danger: #993556;
     --green: #639922;
     --red: #e24b4a;
     --amber: #ef9f27;
+    --purple: #8456c8;
+    --purple-bg: #f0e6fa;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -43,6 +44,8 @@
       --success-bg: #04342c;
       --warning: #efbf27;
       --warning-bg: #412402;
+      --purple: #c4a3f0;
+      --purple-bg: #2b1a4a;
     }
   }
   * { box-sizing: border-box; }
@@ -61,9 +64,7 @@
     margin: 0 auto;
     padding: 1.5rem 1rem 4rem;
   }
-  header {
-    margin-bottom: 1.5rem;
-  }
+  header { margin-bottom: 1.25rem; }
   h1 {
     font-size: 22px;
     font-weight: 500;
@@ -75,6 +76,30 @@
     font-size: 14px;
     margin: 0;
   }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 1rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-family: inherit;
+    transition: color 0.15s, border-color 0.15s;
+    margin-bottom: -0.5px;
+  }
+  .tab.active {
+    color: var(--text);
+    border-bottom-color: var(--accent);
+  }
+  .tab:hover { color: var(--text); }
   .stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -102,7 +127,7 @@
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
   }
-  button, .btn {
+  button {
     background: transparent;
     border: 0.5px solid var(--border-strong);
     color: var(--text);
@@ -112,22 +137,10 @@
     font-family: inherit;
     cursor: pointer;
     transition: background 0.15s;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
   }
-  button:hover, .btn:hover { background: var(--surface-2); }
+  button:hover { background: var(--surface-2); }
   button:active { transform: scale(0.98); }
-  .btn-icon {
-    width: 14px;
-    height: 14px;
-    stroke-width: 2;
-    fill: none;
-    stroke: currentColor;
-  }
-  .week {
-    margin-bottom: 1.75rem;
-  }
+  .week { margin-bottom: 1.75rem; }
   .week-header {
     display: flex;
     align-items: center;
@@ -150,6 +163,7 @@
   .tag-base { background: var(--accent-bg); color: var(--accent); }
   .tag-peak { background: var(--warning-bg); color: var(--warning); }
   .tag-test { background: var(--success-bg); color: var(--success); }
+  .tag-strength { background: var(--purple-bg); color: var(--purple); }
   .workout {
     background: var(--surface);
     border: 0.5px solid var(--border);
@@ -158,9 +172,7 @@
     margin-bottom: 8px;
     transition: background 0.2s;
   }
-  .workout.done {
-    background: var(--surface-2);
-  }
+  .workout.done { background: var(--surface-2); }
   .workout-head {
     display: flex;
     align-items: flex-start;
@@ -175,10 +187,7 @@
     accent-color: var(--accent);
     flex-shrink: 0;
   }
-  .workout-meta {
-    flex: 1;
-    min-width: 0;
-  }
+  .workout-meta { flex: 1; min-width: 0; }
   .workout-type {
     font-size: 14px;
     font-weight: 500;
@@ -198,6 +207,14 @@
     color: var(--text-secondary);
     line-height: 1.45;
   }
+  .exercise-list {
+    margin: 6px 0 0;
+    padding-left: 18px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .exercise-list li { margin-bottom: 2px; }
   .fields {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
@@ -235,6 +252,33 @@
     resize: vertical;
     font-size: 13px;
   }
+  .info-block {
+    background: var(--surface-2);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 1.25rem;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+  .info-block strong { color: var(--text); }
+  .info-block ul { padding-left: 18px; margin: 8px 0 0; }
+  .info-block li { margin-bottom: 4px; }
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0 4px;
+    font-size: 13px;
+  }
+  .schedule-table td {
+    padding: 4px 8px;
+    border-bottom: 0.5px solid var(--border);
+  }
+  .schedule-table td:first-child {
+    font-weight: 500;
+    width: 80px;
+    color: var(--text);
+  }
   .footer {
     margin-top: 2rem;
     padding-top: 1rem;
@@ -243,6 +287,7 @@
     font-size: 12px;
     text-align: center;
   }
+  .hidden { display: none; }
   @media (max-width: 480px) {
     .container { padding: 1rem 0.75rem 3rem; }
     .stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
@@ -251,10 +296,12 @@
     .stat-label { font-size: 11px; }
     h1 { font-size: 20px; }
     .fields { grid-template-columns: repeat(2, 1fr); }
+    .tab { padding: 10px 8px; font-size: 13px; }
   }
   @media print {
     body { background: white; color: black; }
-    .toolbar, .check { display: none; }
+    .toolbar, .tabs, .check { display: none; }
+    .hidden { display: block !important; }
     .workout { break-inside: avoid; border: 1px solid #ccc; }
   }
 </style>
@@ -266,18 +313,24 @@
     <p class="subtitle">Цель: тест 5 км ~5:35–5:40 · база 5:46/км → 5:35/км</p>
   </header>
 
+  <div class="tabs" role="tablist">
+    <button class="tab active" data-tab="running" role="tab">🏃 Бег</button>
+    <button class="tab" data-tab="strength" role="tab">💪 Силовые</button>
+    <button class="tab" data-tab="schedule" role="tab">📅 Расписание</button>
+  </div>
+
   <div class="stats">
     <div class="stat">
       <div class="stat-label">Выполнено</div>
-      <div class="stat-value" id="done-count">0 / 12</div>
+      <div class="stat-value" id="done-count">0 / 0</div>
     </div>
     <div class="stat">
-      <div class="stat-label">Объём, км</div>
-      <div class="stat-value" id="total-km">0</div>
+      <div class="stat-label" id="metric-2-label">Объём, км</div>
+      <div class="stat-value" id="metric-2">0</div>
     </div>
     <div class="stat">
-      <div class="stat-label">Ср. пульс</div>
-      <div class="stat-value" id="avg-hr">—</div>
+      <div class="stat-label" id="metric-3-label">Ср. пульс</div>
+      <div class="stat-value" id="metric-3">—</div>
     </div>
   </div>
 
@@ -289,7 +342,54 @@
     <button id="reset-btn">⟲ Сбросить</button>
   </div>
 
-  <div id="weeks"></div>
+  <div id="tab-running" class="tab-content">
+    <div id="weeks-running"></div>
+  </div>
+
+  <div id="tab-strength" class="tab-content hidden">
+    <div class="info-block">
+      <strong>Логика на время бегового блока:</strong> режим поддержания, не прогрессии. Бег и силовая конкурируют за восстановление, поэтому объём силовой урезан до ~60% обычного. После теста на 5 км вернёшься к полному объёму и прогрессии.<br><br>
+      <strong>Когда делать:</strong> Тип A — во вторник (после лёгкого бега, перед ускорениями). Тип B — в четверг (после ускорений, перед прогрессией). Не накануне качественной беговой.
+    </div>
+    <div id="weeks-strength"></div>
+  </div>
+
+  <div id="tab-schedule" class="tab-content hidden">
+    <div class="info-block">
+      <strong>Базовое расписание недели</strong>
+      <table class="schedule-table">
+        <tr><td>Пн</td><td>🏃 Т1: Лёгкий бег</td></tr>
+        <tr><td>Вт</td><td>💪 Тип A (верх тела) + растяжка</td></tr>
+        <tr><td>Ср</td><td>🏃 Т2: Ускорения</td></tr>
+        <tr><td>Чт</td><td>💪 Тип B (низ + кор) — урезанный объём</td></tr>
+        <tr><td>Пт/Сб</td><td>🏃 Т3: Прогрессия / темповая</td></tr>
+        <tr><td>Вс</td><td>🧘 Отдых, растяжка, прогулка</td></tr>
+      </table>
+    </div>
+    <div class="info-block">
+      <strong>Ключевые правила</strong>
+      <ul>
+        <li>Лёгкий бег = HR &lt;145, скучновато, темп 6:20–6:40</li>
+        <li>Ускорения = 30 сек на 4:30–4:40, отдых 90 сек, не максимум</li>
+        <li>Перед тестом — 2 дня отдыха или очень лёгкая тонизация</li>
+        <li>Силовая — не накануне качественной беговой</li>
+        <li>В четверг режь объём «низа» наполовину</li>
+        <li>Если ноги «не успевают» — пропусти силовую, не геройствуй</li>
+        <li>JSON-бэкап раз в неделю — обязательно</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <strong>Ориентиры темпа</strong>
+      <table class="schedule-table">
+        <tr><td>Лёгкий</td><td>6:20–6:40/км · HR 130–145</td></tr>
+        <tr><td>Темповый</td><td>5:45/км · HR 155–165</td></tr>
+        <tr><td>Прогрессия</td><td>от 6:10 до 5:30/км</td></tr>
+        <tr><td>Ускорения</td><td>4:30–4:40/км (30 сек)</td></tr>
+        <tr><td>Интервалы</td><td>4:40–4:50/км (1 мин)</td></tr>
+        <tr><td>Тест 5 км</td><td>5:35–5:40/км</td></tr>
+      </table>
+    </div>
+  </div>
 
   <div class="footer">
     Данные хранятся локально в этом браузере. Делай бэкап JSON раз в неделю.
@@ -299,7 +399,7 @@
 <input type="file" id="import-file" accept=".json" style="display:none" />
 
 <script>
-const PLAN = [
+const RUNNING_PLAN = [
   { week: 1, tag: "База", tagClass: "tag-base", workouts: [
     { id: "w1t1", type: "Лёгкий", color: "#639922", plan: "5 км · 6:20–6:40 · HR <145" },
     { id: "w1t2", type: "Ускорения", color: "#e24b4a", plan: "1 км разминка + 6×30 сек @ 4:30–4:40 (отдых 90 сек) + 1 км заминка · ~4 км" },
@@ -317,13 +417,51 @@ const PLAN = [
   ]},
   { week: 4, tag: "Тест", tagClass: "tag-test", workouts: [
     { id: "w4t1", type: "Лёгкий", color: "#639922", plan: "4 км · 6:30 · очень легко" },
-    { id: "w4t2", type: "Тонизация", color: "#e24b4a", plan: "1 км разминка + 4×30 сек быстро + 1 км заминка" },
+    { id: "w4t2", type: "Тонизация", color: "#e24b4a", plan: "1 км разминка + 4×30 сек быстро (полный отдых между) + 1 км заминка" },
     { id: "w4t3", type: "ТЕСТ 5 КМ", color: "#ef9f27", plan: "Цель: 5:35–5:40 · первый км 5:40, держать до 4-го, последний на максимуме" }
   ]}
 ];
 
-const STORAGE_KEY = "running-plan-v1";
-let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+const STRENGTH_PLAN = [
+  { week: 1, tag: "Поддержание", tagClass: "tag-strength", workouts: [
+    { id: "s1a", type: "Тип A — верх тела (вт)", color: "#8456c8",
+      exercises: ["Подтягивания обычным хватом: 2×8", "Подтягивания широким хватом: 1×8", "Отжимания широкой стойкой: 2×15", "Отжимания узким хватом: 1×8", "Пресс (подъёмы согнутых ног): 2×12–15"] },
+    { id: "s1b", type: "Тип B — низ + кор (чт)", color: "#8456c8",
+      exercises: ["Приседания: 2×10", "Выпады назад: 2×8 на ногу", "Ягодичный мост: 3×15", "Планка: 3×30–45 сек", "Подъёмы на носок: 2×12"] }
+  ]},
+  { week: 2, tag: "Поддержание", tagClass: "tag-strength", workouts: [
+    { id: "s2a", type: "Тип A — верх тела (вт)", color: "#8456c8",
+      exercises: ["Подтягивания обычным хватом: 2×8", "Подтягивания широким хватом: 1×8", "Отжимания широкой стойкой: 2×15", "Отжимания узким хватом: 1×8", "Пресс: 2×12–15"] },
+    { id: "s2b", type: "Тип B — вариация (чт)", color: "#8456c8",
+      exercises: ["Приседания с паузой 2 сек внизу: 2×10", "Болгарские сплит-приседы: 2×6 на ногу", "Ягодичный мост на одной ноге: 2×8 на ногу", "Боковая планка: 2×30 сек на сторону", "Подъёмы на носок на одной ноге: 2×8"] }
+  ]},
+  { week: 3, tag: "Пик беговой", tagClass: "tag-peak", workouts: [
+    { id: "s3a", type: "Тип A — лёгкий (вт)", color: "#8456c8",
+      exercises: ["⚠️ Пиковая беговая неделя — если ноги тяжёлые, пропусти", "Подтягивания обычным хватом: 2×8", "Отжимания широкой стойкой: 2×15", "Пресс: 2×12"] },
+    { id: "s3b", type: "Тип B — минимальный (чт)", color: "#8456c8",
+      exercises: ["⚠️ Только при хорошем самочувствии", "Ягодичный мост: 3×15", "Планка: 3×30 сек", "Птица-собака (bird-dog): 3×10 на сторону", "Подъёмы на носок: 1×15 лёгкие"] }
+  ]},
+  { week: 4, tag: "Перед тестом", tagClass: "tag-test", workouts: [
+    { id: "s4a", type: "Только лёгкий кор (вт)", color: "#8456c8",
+      exercises: ["⚠️ Неделя теста — никаких тяжёлых силовых", "Планка: 2×30 сек", "Боковая планка: 2×20 сек на сторону", "Птица-собака: 2×8 на сторону", "Растяжка"] },
+    { id: "s4b", type: "ПРОПУСТИТЬ (чт)", color: "#8456c8",
+      exercises: ["В неделю теста вторая силовая не делается", "Только растяжка и лёгкая активность", "Цель — прийти к тесту со свежими ногами"] }
+  ]}
+];
+
+const STORAGE_KEY = "running-plan-v2";
+const STORAGE_KEY_OLD = "running-plan-v1";
+
+let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+if (!state) {
+  const oldState = JSON.parse(localStorage.getItem(STORAGE_KEY_OLD) || "{}");
+  state = oldState || {};
+  if (Object.keys(state).length) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+}
+
+let activeTab = "running";
 
 function save() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -333,9 +471,9 @@ function escapeHtml(s) {
   return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 }
 
-function render() {
-  const container = document.getElementById("weeks");
-  container.innerHTML = PLAN.map(w => `
+function renderRunning() {
+  const container = document.getElementById("weeks-running");
+  container.innerHTML = RUNNING_PLAN.map(w => `
     <section class="week">
       <div class="week-header">
         <span class="week-title">Неделя ${w.week}</span>
@@ -364,30 +502,105 @@ function render() {
       }).join("")}
     </section>
   `).join("");
-
   bindEvents();
+}
+
+function renderStrength() {
+  const container = document.getElementById("weeks-strength");
+  container.innerHTML = STRENGTH_PLAN.map(w => `
+    <section class="week">
+      <div class="week-header">
+        <span class="week-title">Неделя ${w.week}</span>
+        <span class="week-tag ${w.tagClass}">${w.tag}</span>
+      </div>
+      ${w.workouts.map(wo => {
+        const s = state[wo.id] || {};
+        return `
+          <div class="workout ${s.done ? "done" : ""}" data-id="${wo.id}">
+            <div class="workout-head">
+              <input type="checkbox" class="check" data-id="${wo.id}" ${s.done ? "checked" : ""} aria-label="Выполнено" />
+              <div class="workout-meta">
+                <div class="workout-type"><span class="dot" style="background:${wo.color}"></span>${escapeHtml(wo.type)}</div>
+                <ul class="exercise-list">
+                  ${wo.exercises.map(e => `<li>${escapeHtml(e)}</li>`).join("")}
+                </ul>
+              </div>
+            </div>
+            <div class="fields">
+              <div class="field"><label>Длит., мин</label><input type="number" inputmode="numeric" data-id="${wo.id}" data-field="duration" value="${escapeHtml(s.duration || "")}" /></div>
+              <div class="field"><label>RPE 1–10</label><input type="number" min="1" max="10" inputmode="numeric" data-id="${wo.id}" data-field="rpe" value="${escapeHtml(s.rpe || "")}" /></div>
+            </div>
+            <textarea class="note" data-id="${wo.id}" data-field="note" placeholder="Заметки: что заменил, как чувствуются ноги…">${escapeHtml(s.note || "")}</textarea>
+          </div>
+        `;
+      }).join("")}
+    </section>
+  `).join("");
+  bindEvents();
+}
+
+function switchTab(tab) {
+  activeTab = tab;
+  document.querySelectorAll(".tab").forEach(t => t.classList.toggle("active", t.dataset.tab === tab));
+  document.querySelectorAll(".tab-content").forEach(c => c.classList.add("hidden"));
+  document.getElementById(`tab-${tab}`).classList.remove("hidden");
   updateStats();
 }
 
 function updateStats() {
-  const all = PLAN.flatMap(w => w.workouts);
-  let done = 0, kmSum = 0, hrSum = 0, hrCount = 0;
-  all.forEach(wo => {
-    const s = state[wo.id] || {};
-    if (s.done) done++;
-    const km = parseFloat(s.km);
-    if (!isNaN(km)) kmSum += km;
-    const hr = parseInt(s.hr);
-    if (!isNaN(hr)) { hrSum += hr; hrCount++; }
-  });
-  document.getElementById("done-count").textContent = `${done} / ${all.length}`;
-  document.getElementById("total-km").textContent = kmSum.toFixed(1);
-  document.getElementById("avg-hr").textContent = hrCount ? Math.round(hrSum / hrCount) : "—";
+  if (activeTab === "running") {
+    const all = RUNNING_PLAN.flatMap(w => w.workouts);
+    let done = 0, kmSum = 0, hrSum = 0, hrCount = 0;
+    all.forEach(wo => {
+      const s = state[wo.id] || {};
+      if (s.done) done++;
+      const km = parseFloat(s.km);
+      if (!isNaN(km)) kmSum += km;
+      const hr = parseInt(s.hr);
+      if (!isNaN(hr)) { hrSum += hr; hrCount++; }
+    });
+    document.getElementById("done-count").textContent = `${done} / ${all.length}`;
+    document.getElementById("metric-2-label").textContent = "Объём, км";
+    document.getElementById("metric-2").textContent = kmSum.toFixed(1);
+    document.getElementById("metric-3-label").textContent = "Ср. пульс";
+    document.getElementById("metric-3").textContent = hrCount ? Math.round(hrSum / hrCount) : "—";
+  } else if (activeTab === "strength") {
+    const all = STRENGTH_PLAN.flatMap(w => w.workouts);
+    let done = 0, durSum = 0, rpeSum = 0, rpeCount = 0;
+    all.forEach(wo => {
+      const s = state[wo.id] || {};
+      if (s.done) done++;
+      const d = parseFloat(s.duration);
+      if (!isNaN(d)) durSum += d;
+      const r = parseInt(s.rpe);
+      if (!isNaN(r)) { rpeSum += r; rpeCount++; }
+    });
+    document.getElementById("done-count").textContent = `${done} / ${all.length}`;
+    document.getElementById("metric-2-label").textContent = "Время, мин";
+    document.getElementById("metric-2").textContent = durSum;
+    document.getElementById("metric-3-label").textContent = "Ср. RPE";
+    document.getElementById("metric-3").textContent = rpeCount ? (rpeSum / rpeCount).toFixed(1) : "—";
+  } else {
+    const allRun = RUNNING_PLAN.flatMap(w => w.workouts);
+    const allStr = STRENGTH_PLAN.flatMap(w => w.workouts);
+    const all = [...allRun, ...allStr];
+    let done = 0;
+    all.forEach(wo => {
+      if ((state[wo.id] || {}).done) done++;
+    });
+    document.getElementById("done-count").textContent = `${done} / ${all.length}`;
+    document.getElementById("metric-2-label").textContent = "Бег";
+    const runDone = allRun.filter(wo => (state[wo.id] || {}).done).length;
+    document.getElementById("metric-2").textContent = `${runDone}/${allRun.length}`;
+    document.getElementById("metric-3-label").textContent = "Силовые";
+    const strDone = allStr.filter(wo => (state[wo.id] || {}).done).length;
+    document.getElementById("metric-3").textContent = `${strDone}/${allStr.length}`;
+  }
 }
 
 function bindEvents() {
   document.querySelectorAll(".check").forEach(cb => {
-    cb.addEventListener("change", e => {
+    cb.onchange = e => {
       const id = e.target.dataset.id;
       state[id] = state[id] || {};
       state[id].done = e.target.checked;
@@ -395,34 +608,46 @@ function bindEvents() {
       const card = document.querySelector(`.workout[data-id="${id}"]`);
       if (card) card.classList.toggle("done", e.target.checked);
       updateStats();
-    });
+    };
   });
   document.querySelectorAll("input[data-field], textarea[data-field]").forEach(inp => {
-    inp.addEventListener("change", e => {
+    inp.onchange = e => {
       const id = e.target.dataset.id;
       const f = e.target.dataset.field;
       state[id] = state[id] || {};
       state[id][f] = e.target.value;
       save();
       updateStats();
-    });
+    };
   });
 }
+
+document.querySelectorAll(".tab").forEach(t => {
+  t.addEventListener("click", () => switchTab(t.dataset.tab));
+});
 
 document.getElementById("reset-btn").addEventListener("click", () => {
   if (confirm("Сбросить весь прогресс? Сначала экспортируй бэкап если нужно.")) {
     state = {};
     save();
-    render();
+    renderRunning();
+    renderStrength();
+    updateStats();
   }
 });
 
 document.getElementById("export-csv").addEventListener("click", () => {
-  const rows = [["Неделя","Тренировка","План","Выполнено","Дистанция","Темп","HR","RPE","Заметки"]];
-  PLAN.forEach(w => {
+  const rows = [["Тип","Неделя","Тренировка","План","Выполнено","Дистанция","Темп","HR","Время,мин","RPE","Заметки"]];
+  RUNNING_PLAN.forEach(w => {
     w.workouts.forEach(wo => {
       const s = state[wo.id] || {};
-      rows.push([w.week, wo.type, wo.plan, s.done ? "да" : "нет", s.km || "", s.pace || "", s.hr || "", s.rpe || "", s.note || ""]);
+      rows.push(["Бег", w.week, wo.type, wo.plan, s.done ? "да" : "нет", s.km || "", s.pace || "", s.hr || "", "", s.rpe || "", s.note || ""]);
+    });
+  });
+  STRENGTH_PLAN.forEach(w => {
+    w.workouts.forEach(wo => {
+      const s = state[wo.id] || {};
+      rows.push(["Силовая", w.week, wo.type, wo.exercises.join("; "), s.done ? "да" : "нет", "", "", "", s.duration || "", s.rpe || "", s.note || ""]);
     });
   });
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
@@ -430,7 +655,7 @@ document.getElementById("export-csv").addEventListener("click", () => {
 });
 
 document.getElementById("export-json").addEventListener("click", () => {
-  const backup = { exported: new Date().toISOString(), data: state };
+  const backup = { exported: new Date().toISOString(), version: 2, data: state };
   download(`running-plan-backup-${new Date().toISOString().slice(0,10)}.json`, JSON.stringify(backup, null, 2), "application/json");
 });
 
@@ -450,7 +675,9 @@ document.getElementById("import-file").addEventListener("change", e => {
       if (confirm("Заменить текущие данные импортированными?")) {
         state = data;
         save();
-        render();
+        renderRunning();
+        renderStrength();
+        updateStats();
       }
     } catch (err) {
       alert("Не удалось прочитать файл: " + err.message);
@@ -472,7 +699,9 @@ function download(filename, content, type) {
   URL.revokeObjectURL(url);
 }
 
-render();
+renderRunning();
+renderStrength();
+updateStats();
 </script>
 </body>
 </html>
