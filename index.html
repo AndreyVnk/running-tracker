@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <meta name="theme-color" content="#0f0f0f" />
-<title>Беговой план · 4 недели</title>
+<title>Беговой план · возврат после болезни</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏃%3C/text%3E%3C/svg%3E" />
 <style>
   :root {
@@ -27,6 +27,8 @@
     --amber: #ef9f27;
     --purple: #8456c8;
     --purple-bg: #f0e6fa;
+    --teal: #0e7c8a;
+    --teal-bg: #d4f0f4;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -46,6 +48,8 @@
       --warning-bg: #412402;
       --purple: #c4a3f0;
       --purple-bg: #2b1a4a;
+      --teal: #5dc8d4;
+      --teal-bg: #033038;
     }
   }
   * { box-sizing: border-box; }
@@ -160,6 +164,7 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
+  .tag-return { background: var(--teal-bg); color: var(--teal); }
   .tag-base { background: var(--accent-bg); color: var(--accent); }
   .tag-peak { background: var(--warning-bg); color: var(--warning); }
   .tag-test { background: var(--success-bg); color: var(--success); }
@@ -264,6 +269,16 @@
   .info-block strong { color: var(--text); }
   .info-block ul { padding-left: 18px; margin: 8px 0 0; }
   .info-block li { margin-bottom: 4px; }
+  .warning-block {
+    background: var(--warning-bg);
+    border-left: 3px solid var(--warning);
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 1rem;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.5;
+  }
   .schedule-table {
     width: 100%;
     border-collapse: collapse;
@@ -309,8 +324,8 @@
 <body>
 <div class="container">
   <header>
-    <h1>🏃 Беговой план · 4 недели</h1>
-    <p class="subtitle">Цель: тест 5 км ~5:35–5:40 · база 5:46/км → 5:35/км</p>
+    <h1>🏃 Возврат к бегу · 3 недели до теста</h1>
+    <p class="subtitle">После ОРВИ → подведение → тест 5 км</p>
   </header>
 
   <div class="tabs" role="tablist">
@@ -343,50 +358,53 @@
   </div>
 
   <div id="tab-running" class="tab-content">
+    <div class="warning-block">
+      <strong>⚠️ Правила возврата после ОРВИ:</strong>
+      <ul style="margin: 6px 0 0; padding-left: 18px;">
+        <li>На первой пробежке держи HR &lt;140, даже если темп кажется смешно медленным</li>
+        <li>Если появятся одышка, кашель, давление в груди — остановись и завершай день</li>
+        <li>Утренний пульс покоя записывай 3 дня — если выше 60, ещё не восстановился</li>
+        <li>Никакой скоростной работы первую неделю — только лёгкое</li>
+        <li>Слушай тело больше плана: если устал — пропусти, не геройствуй</li>
+      </ul>
+    </div>
     <div id="weeks-running"></div>
   </div>
 
   <div id="tab-strength" class="tab-content hidden">
     <div class="info-block">
-      <strong>Логика на время бегового блока:</strong> режим поддержания, не прогрессии. Бег и силовая конкурируют за восстановление, поэтому объём силовой урезан до ~60% обычного. После теста на 5 км вернёшься к полному объёму и прогрессии.<br><br>
-      <strong>Когда делать:</strong> Тип A — во вторник (после лёгкого бега, перед ускорениями). Тип B — в четверг (после ускорений, перед прогрессией). Не накануне качественной беговой.
+      <strong>Силовые на время возврата:</strong> начнём с самого минимума на 1-й неделе, постепенно нарастим. После болезни тело восстанавливает не только аэробную, но и силовую базу. Спешки нет.<br><br>
+      <strong>Главное правило:</strong> силовая всегда после беговой, не накануне. Если в день беговой ноги тяжёлые — пропусти силовую.
     </div>
     <div id="weeks-strength"></div>
   </div>
 
   <div id="tab-schedule" class="tab-content hidden">
     <div class="info-block">
-      <strong>Базовое расписание недели</strong>
+      <strong>Базовое расписание возврата</strong>
       <table class="schedule-table">
-        <tr><td>Пн</td><td>🏃 Т1: Лёгкий бег</td></tr>
-        <tr><td>Вт</td><td>💪 Тип A (верх тела) + растяжка</td></tr>
-        <tr><td>Ср</td><td>🏃 Т2: Ускорения</td></tr>
-        <tr><td>Чт</td><td>💪 Тип B (низ + кор) — урезанный объём</td></tr>
-        <tr><td>Пт/Сб</td><td>🏃 Т3: Прогрессия / темповая</td></tr>
-        <tr><td>Вс</td><td>🧘 Отдых, растяжка, прогулка</td></tr>
+        <tr><td>Неделя 1</td><td>Возврат: только лёгкое, 3 пробежки</td></tr>
+        <tr><td>Неделя 2</td><td>Подведение: лёгкая + ускорения + темповая</td></tr>
+        <tr><td>Неделя 3</td><td>Лёгкая + тонизация + ТЕСТ</td></tr>
       </table>
     </div>
     <div class="info-block">
-      <strong>Ключевые правила</strong>
+      <strong>Сигналы тревоги (откатываемся назад на 1 неделю если)</strong>
       <ul>
-        <li>Лёгкий бег = HR &lt;145, скучновато, темп 6:20–6:40</li>
-        <li>Ускорения = 30 сек на 4:30–4:40, отдых 90 сек, не максимум</li>
-        <li>Перед тестом — 2 дня отдыха или очень лёгкая тонизация</li>
-        <li>Силовая — не накануне качественной беговой</li>
-        <li>В четверг режь объём «низа» наполовину</li>
-        <li>Если ноги «не успевают» — пропусти силовую, не геройствуй</li>
-        <li>JSON-бэкап раз в неделю — обязательно</li>
+        <li>Возвращается кашель или насморк после пробежки</li>
+        <li>Утренний пульс покоя &gt;60 несколько дней подряд</li>
+        <li>Лёгкая пробежка ощущается как тяжёлая (RPE &gt;6)</li>
+        <li>Появляется боль в груди или одышка</li>
+        <li>Сон не восстанавливается, постоянная усталость</li>
       </ul>
     </div>
     <div class="info-block">
-      <strong>Ориентиры темпа</strong>
+      <strong>Ориентиры темпа после ОРВИ</strong>
       <table class="schedule-table">
-        <tr><td>Лёгкий</td><td>6:20–6:40/км · HR 130–145</td></tr>
-        <tr><td>Темповый</td><td>5:45/км · HR 155–165</td></tr>
-        <tr><td>Прогрессия</td><td>от 6:10 до 5:30/км</td></tr>
-        <tr><td>Ускорения</td><td>4:30–4:40/км (30 сек)</td></tr>
-        <tr><td>Интервалы</td><td>4:40–4:50/км (1 мин)</td></tr>
-        <tr><td>Тест 5 км</td><td>5:35–5:40/км</td></tr>
+        <tr><td>Лёгкий</td><td>6:40–7:00/км (медленнее обычного на 10-20 сек)</td></tr>
+        <tr><td>Темповый</td><td>5:50/км (медленнее, чем до болезни)</td></tr>
+        <tr><td>Ускорения</td><td>4:40–4:50/км (мягче, чем до болезни)</td></tr>
+        <tr><td>Тест 5 км</td><td>5:25–5:35/км (реалистичная цель)</td></tr>
       </table>
     </div>
   </div>
@@ -400,62 +418,53 @@
 
 <script>
 const RUNNING_PLAN = [
-  { week: 1, tag: "База", tagClass: "tag-base", workouts: [
-    { id: "w1t1", type: "Лёгкий", color: "#639922", plan: "5 км · 6:20–6:40 · HR <145" },
-    { id: "w1t2", type: "Ускорения", color: "#e24b4a", plan: "1 км разминка + 6×30 сек @ 4:30–4:40 (отдых 90 сек) + 1 км заминка · ~4 км" },
-    { id: "w1t3", type: "Прогрессия", color: "#ef9f27", plan: "5 км: 6:10 → 6:00 → 5:50 → 5:40 → 5:30" }
+  { week: 1, tag: "Возврат", tagClass: "tag-return", workouts: [
+    { id: "r1t1", type: "Тестовая трусца", color: "#0e7c8a", plan: "3 км очень медленно · 7:00+/км · HR <140 · Цель: проверить как тело реагирует. Если что-то не так — остановись." },
+    { id: "r1t2", type: "Лёгкий", color: "#639922", plan: "4 км · 6:40–7:00/км · HR <145 · Просто бег, без амбиций." },
+    { id: "r1t3", type: "Лёгкий с активацией", color: "#639922", plan: "5 км · 6:30–6:50/км · HR <150 · В конце 4 ускорения по 15 сек в темпе 5:00 с полным отдыхом — нервная активация." }
   ]},
-  { week: 2, tag: "Развитие", tagClass: "tag-base", workouts: [
-    { id: "w2t1", type: "Лёгкий", color: "#639922", plan: "6 км · 6:20–6:40 · HR <145" },
-    { id: "w2t2", type: "Ускорения", color: "#e24b4a", plan: "1 км разминка + 8×30 сек @ 4:30 (отдых 90 сек) + 1 км заминка · ~4,5 км" },
-    { id: "w2t3", type: "Темповая", color: "#ef9f27", plan: "5 км стабильно 5:45 · HR не выше 160" }
+  { week: 2, tag: "Подведение", tagClass: "tag-base", workouts: [
+    { id: "r2t1", type: "Лёгкий", color: "#639922", plan: "6 км · 6:30/км · HR <145 · Стандартная лёгкая, восстанавливаем привычку к объёму." },
+    { id: "r2t2", type: "Ускорения", color: "#e24b4a", plan: "1 км разминка + 6×30 сек @ 4:40–4:50 (отдых 90 сек) + 1 км заминка · Мягче, чем на пиковой!" },
+    { id: "r2t3", type: "Темповая", color: "#ef9f27", plan: "4 км в темпе 5:50/км · HR не выше 165 · Проверка темповой готовности." }
   ]},
-  { week: 3, tag: "Пик", tagClass: "tag-peak", workouts: [
-    { id: "w3t1", type: "Лёгкий", color: "#639922", plan: "7 км · 6:25–6:45 · HR <145" },
-    { id: "w3t2", type: "Интервалы", color: "#e24b4a", plan: "1 км разминка + 5×1 мин @ 4:40–4:50 (отдых 2 мин трусцой) + 1 км заминка · ~5 км" },
-    { id: "w3t3", type: "Прогрессия", color: "#ef9f27", plan: "6 км: первые 4 км по 6:00, последние 2 км по 5:30" }
-  ]},
-  { week: 4, tag: "Тест", tagClass: "tag-test", workouts: [
-    { id: "w4t1", type: "Лёгкий", color: "#639922", plan: "4 км · 6:30 · очень легко" },
-    { id: "w4t2", type: "Тонизация", color: "#e24b4a", plan: "1 км разминка + 4×30 сек быстро (полный отдых между) + 1 км заминка" },
-    { id: "w4t3", type: "ТЕСТ 5 КМ", color: "#ef9f27", plan: "Цель: 5:35–5:40 · первый км 5:40, держать до 4-го, последний на максимуме" }
+  { week: 3, tag: "Тест", tagClass: "tag-test", workouts: [
+    { id: "r3t1", type: "Лёгкий", color: "#639922", plan: "4 км · 6:30/км · очень спокойно" },
+    { id: "r3t2", type: "Тонизация", color: "#e24b4a", plan: "1 км разминка + 4×30 сек @ 5:00–5:10 (полный отдых) + 1 км заминка · НЕ нагружать!" },
+    { id: "r3t3", type: "ТЕСТ 5 КМ", color: "#ef9f27", plan: "Цель: 5:25–5:35/км · 27:00–28:00 · Тактика: km 1 в 5:30, держать, последний км ускориться." }
   ]}
 ];
 
 const STRENGTH_PLAN = [
-  { week: 1, tag: "Поддержание", tagClass: "tag-strength", workouts: [
-    { id: "s1a", type: "Тип A — верх тела (вт)", color: "#8456c8",
-      exercises: ["Подтягивания обычным хватом: 2×8", "Подтягивания широким хватом: 1×8", "Отжимания широкой стойкой: 2×15", "Отжимания узким хватом: 1×8", "Пресс (подъёмы согнутых ног): 2×12–15"] },
-    { id: "s1b", type: "Тип B — низ + кор (чт)", color: "#8456c8",
-      exercises: ["Приседания: 2×10", "Выпады назад: 2×8 на ногу", "Ягодичный мост: 3×15", "Планка: 3×30–45 сек", "Подъёмы на носок: 2×12"] }
+  { week: 1, tag: "Возврат", tagClass: "tag-return", workouts: [
+    { id: "s1a", type: "Минимум кор (вт после Т1)", color: "#8456c8",
+      exercises: ["Только если беговая прошла хорошо", "Планка: 2×30 сек", "Боковая планка: 2×20 сек на сторону", "Птица-собака: 2×8 на сторону", "Растяжка"] },
+    { id: "s1b", type: "Лёгкий верх тела (чт)", color: "#8456c8",
+      exercises: ["Подтягивания обычным хватом: 1×8", "Отжимания широкой стойкой: 2×12", "Пресс: 2×12", "Без подходов на максимум — мягкое возвращение"] }
   ]},
-  { week: 2, tag: "Поддержание", tagClass: "tag-strength", workouts: [
+  { week: 2, tag: "Подведение", tagClass: "tag-base", workouts: [
     { id: "s2a", type: "Тип A — верх тела (вт)", color: "#8456c8",
-      exercises: ["Подтягивания обычным хватом: 2×8", "Подтягивания широким хватом: 1×8", "Отжимания широкой стойкой: 2×15", "Отжимания узким хватом: 1×8", "Пресс: 2×12–15"] },
-    { id: "s2b", type: "Тип B — вариация (чт)", color: "#8456c8",
-      exercises: ["Приседания с паузой 2 сек внизу: 2×10", "Болгарские сплит-приседы: 2×6 на ногу", "Ягодичный мост на одной ноге: 2×8 на ногу", "Боковая планка: 2×30 сек на сторону", "Подъёмы на носок на одной ноге: 2×8"] }
+      exercises: ["Подтягивания обычным хватом: 2×8", "Подтягивания широким хватом: 1×6", "Отжимания широкой стойкой: 2×15", "Отжимания узким хватом: 1×8", "Пресс: 2×12"] },
+    { id: "s2b", type: "Тип B — низ + кор лёгкий (чт)", color: "#8456c8",
+      exercises: ["Приседания: 2×10", "Выпады назад: 2×8 на ногу", "Ягодичный мост: 3×15", "Планка: 3×30 сек", "Подъёмы на носок: 2×12"] }
   ]},
-  { week: 3, tag: "Пик беговой", tagClass: "tag-peak", workouts: [
-    { id: "s3a", type: "Тип A — лёгкий (вт)", color: "#8456c8",
-      exercises: ["⚠️ Пиковая беговая неделя — если ноги тяжёлые, пропусти", "Подтягивания обычным хватом: 2×8", "Отжимания широкой стойкой: 2×15", "Пресс: 2×12"] },
-    { id: "s3b", type: "Тип B — минимальный (чт)", color: "#8456c8",
-      exercises: ["⚠️ Только при хорошем самочувствии", "Ягодичный мост: 3×15", "Планка: 3×30 сек", "Птица-собака (bird-dog): 3×10 на сторону", "Подъёмы на носок: 1×15 лёгкие"] }
-  ]},
-  { week: 4, tag: "Перед тестом", tagClass: "tag-test", workouts: [
-    { id: "s4a", type: "Только лёгкий кор (вт)", color: "#8456c8",
-      exercises: ["⚠️ Неделя теста — никаких тяжёлых силовых", "Планка: 2×30 сек", "Боковая планка: 2×20 сек на сторону", "Птица-собака: 2×8 на сторону", "Растяжка"] },
-    { id: "s4b", type: "ПРОПУСТИТЬ (чт)", color: "#8456c8",
+  { week: 3, tag: "Перед тестом", tagClass: "tag-test", workouts: [
+    { id: "s3a", type: "Только лёгкий кор (вт)", color: "#8456c8",
+      exercises: ["⚠️ Неделя теста — никаких тяжёлых силовых", "Планка: 2×30 сек", "Боковая планка: 2×20 сек", "Птица-собака: 2×8", "Растяжка"] },
+    { id: "s3b", type: "ПРОПУСТИТЬ (чт)", color: "#8456c8",
       exercises: ["В неделю теста вторая силовая не делается", "Только растяжка и лёгкая активность", "Цель — прийти к тесту со свежими ногами"] }
   ]}
 ];
 
-const STORAGE_KEY = "running-plan-v2";
-const STORAGE_KEY_OLD = "running-plan-v1";
+const STORAGE_KEY = "running-plan-v3";
+const STORAGE_KEY_OLD2 = "running-plan-v2";
+const STORAGE_KEY_OLD1 = "running-plan-v1";
 
 let state = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
 if (!state) {
-  const oldState = JSON.parse(localStorage.getItem(STORAGE_KEY_OLD) || "{}");
-  state = oldState || {};
+  const oldState2 = JSON.parse(localStorage.getItem(STORAGE_KEY_OLD2) || "null");
+  const oldState1 = JSON.parse(localStorage.getItem(STORAGE_KEY_OLD1) || "null");
+  state = oldState2 || oldState1 || {};
   if (Object.keys(state).length) {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
@@ -492,11 +501,11 @@ function renderRunning() {
             </div>
             <div class="fields">
               <div class="field"><label>Дист., км</label><input type="number" step="0.1" inputmode="decimal" data-id="${wo.id}" data-field="km" value="${escapeHtml(s.km || "")}" /></div>
-              <div class="field"><label>Темп ср.</label><input type="text" data-id="${wo.id}" data-field="pace" value="${escapeHtml(s.pace || "")}" placeholder="5:50" /></div>
+              <div class="field"><label>Темп ср.</label><input type="text" data-id="${wo.id}" data-field="pace" value="${escapeHtml(s.pace || "")}" placeholder="6:30" /></div>
               <div class="field"><label>HR ср.</label><input type="number" inputmode="numeric" data-id="${wo.id}" data-field="hr" value="${escapeHtml(s.hr || "")}" /></div>
               <div class="field"><label>RPE 1–10</label><input type="number" min="1" max="10" inputmode="numeric" data-id="${wo.id}" data-field="rpe" value="${escapeHtml(s.rpe || "")}" /></div>
             </div>
-            <textarea class="note" data-id="${wo.id}" data-field="note" placeholder="Заметки: погода, самочувствие, что получилось…">${escapeHtml(s.note || "")}</textarea>
+            <textarea class="note" data-id="${wo.id}" data-field="note" placeholder="Заметки: погода, самочувствие, как пошёл бег…">${escapeHtml(s.note || "")}</textarea>
           </div>
         `;
       }).join("")}
@@ -651,11 +660,11 @@ document.getElementById("export-csv").addEventListener("click", () => {
     });
   });
   const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(",")).join("\n");
-  download("running-plan.csv", "\uFEFF" + csv, "text/csv;charset=utf-8");
+  download("running-plan-return.csv", "\uFEFF" + csv, "text/csv;charset=utf-8");
 });
 
 document.getElementById("export-json").addEventListener("click", () => {
-  const backup = { exported: new Date().toISOString(), version: 2, data: state };
+  const backup = { exported: new Date().toISOString(), version: 3, data: state };
   download(`running-plan-backup-${new Date().toISOString().slice(0,10)}.json`, JSON.stringify(backup, null, 2), "application/json");
 });
 
