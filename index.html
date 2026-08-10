@@ -82,6 +82,12 @@
   .tbl .dt{font-family:var(--mono);color:var(--faint);font-size:12px;white-space:nowrap}
   .tbl .num{font-family:var(--mono);color:var(--aerobic);font-weight:500}
   .tbl .note{color:var(--muted);font-size:13px}
+  .tbl .none{font-family:var(--mono);color:var(--faint);text-align:center}
+  .tbl .num.lg{color:var(--ink);font-weight:700}
+  .tbl .sum{font-family:var(--mono);font-weight:700;font-size:16px;color:var(--aerobic);border-left:1px solid var(--line)}
+  .tbl tr.deload .sum{color:var(--strength)}
+  .tbl th:nth-child(n+3),.tbl td.num,.tbl td.sum,.tbl td.none{text-align:center}
+  .tblnote{color:var(--faint);font-size:12.5px;margin:10px 0 0;font-family:var(--mono);line-height:1.5}
   .tbl tr.deload td{background:var(--surface)}
   .tbl tr.deload .wk{color:var(--strength)}
   .tbl tr.deload .num{color:var(--strength)}
@@ -195,34 +201,40 @@
 
       <h2>Структура недели</h2>
       <div class="legend">
-        <div class="day"><div class="d">Вт</div><div class="t">Лёгкая</div><div class="n">5–6 км · кап 145</div></div>
-        <div class="day"><div class="d">Чт</div><div class="t">Лёгкая + страйды</div><div class="n">5–6 км + 4×20 сек</div></div>
-        <div class="day"><div class="d">Сб / Вс</div><div class="t">Длинная</div><div class="n">по таблице · кап 150</div></div>
-        <div class="day"><div class="d">+ с 5-й нед.</div><div class="t">4-я лёгкая</div><div class="n">4 км · восстановительная</div></div>
+        <div class="day"><div class="d">Вт</div><div class="t">Лёгкая</div><div class="n">5 → 7 км · кап 145</div></div>
+        <div class="day"><div class="d">Чт</div><div class="t">Лёгкая + страйды</div><div class="n">5 → 8 км + 4×20 сек</div></div>
+        <div class="day"><div class="d">Сб / Вс</div><div class="t">Длинная</div><div class="n">7 → 13 км · кап 150</div></div>
+        <div class="day"><div class="d">+ с 5-й нед.</div><div class="t">4-я лёгкая</div><div class="n">4 → 6 км · восстановительная</div></div>
       </div>
+      <p class="lede" style="margin-top:-8px">Все четыре дистанции растут — точные километры на каждую неделю в таблице ниже.</p>
 
-      <h2>Прогрессия · 12 недель</h2>
+      <h2>Прогрессия · 12 недель · все километры</h2>
       <div class="table-scroll">
       <table class="tbl">
-        <thead><tr><th>Нед</th><th>Даты</th><th>Длинная</th><th>Объём</th><th>Заметка</th></tr></thead>
+        <thead><tr><th>Нед</th><th>Даты</th><th>Вт</th><th>Чт<br><span style="text-transform:none;letter-spacing:0">+страйды</span></th><th>4-я</th><th>Длинная</th><th>Итого</th></tr></thead>
         <tbody>
-          <tr><td class="wk">1</td><td class="dt">20–26 июл</td><td class="num">8 км</td><td class="num">~19</td><td class="note">Вход в блок, всё спокойно</td></tr>
-          <tr><td class="wk">2</td><td class="dt">27 июл–2 авг</td><td class="num">8 км</td><td class="num">~20</td><td class="note">Закрепляем структуру</td></tr>
-          <tr><td class="wk">3</td><td class="dt">3–9 авг</td><td class="num">9 км</td><td class="num">~21</td><td class="note">Первый шаг по длинной</td></tr>
-          <tr class="deload"><td class="wk">4</td><td class="dt">10–16 авг</td><td class="num">7 км</td><td class="num">~17</td><td class="note">Разгрузка <span class="tag dl">разгрузка</span></td></tr>
-          <tr class="milestone"><td class="wk">5</td><td class="dt">17–23 авг</td><td class="num">10 км</td><td class="num">~24</td><td class="note">Двузнак + 4-я пробежка <span class="tag new">+4-я</span></td></tr>
-          <tr><td class="wk">6</td><td class="dt">24–30 авг</td><td class="num">10 км</td><td class="num">~26</td><td class="note">Четыре пробежки в неделе</td></tr>
-          <tr><td class="wk">7</td><td class="dt">31 авг–6 сен</td><td class="num">11 км</td><td class="num">~28</td><td class="note">Прохлада начинает помогать</td></tr>
-          <tr class="deload"><td class="wk">8</td><td class="dt">7–13 сен</td><td class="num">8 км</td><td class="num">~22</td><td class="note">Разгрузка <span class="tag dl">разгрузка</span></td></tr>
-          <tr><td class="wk">9</td><td class="dt">14–20 сен</td><td class="num">12 км</td><td class="num">~30</td><td class="note">Порог 30 км/нед</td></tr>
-          <tr><td class="wk">10</td><td class="dt">21–27 сен</td><td class="num">12 км</td><td class="num">~32</td><td class="note">Можно вернуть лёгкое темпо 2–3 км</td></tr>
-          <tr><td class="wk">11</td><td class="dt">28 сен–4 окт</td><td class="num">13 км</td><td class="num">~34</td><td class="note">Пик объёма блока</td></tr>
-          <tr class="deload milestone"><td class="wk">12</td><td class="dt">5–11 окт</td><td class="num">10 км</td><td class="num">~28</td><td class="note">Разгрузка + <b>тест 5 км</b> по прохладе</td></tr>
+          <tr><td class="wk">1</td><td class="dt">20–26 июл</td><td class="num">6</td><td class="num">6</td><td class="none">—</td><td class="num lg">8</td><td class="sum">20</td></tr>
+          <tr><td class="wk">2</td><td class="dt">27 июл–2 авг</td><td class="num">6</td><td class="num">6</td><td class="none">—</td><td class="num lg">8</td><td class="sum">20</td></tr>
+          <tr><td class="wk">3</td><td class="dt">3–9 авг</td><td class="num">6</td><td class="num">6</td><td class="none">—</td><td class="num lg">9</td><td class="sum">21</td></tr>
+          <tr class="deload"><td class="wk">4 <span class="tag dl">разгрузка</span></td><td class="dt">10–16 авг</td><td class="num">5</td><td class="num">5</td><td class="none">—</td><td class="num lg">7</td><td class="sum">17</td></tr>
+          <tr class="milestone"><td class="wk">5 <span class="tag new">+4-я</span></td><td class="dt">17–23 авг</td><td class="num">5</td><td class="num">5</td><td class="num">4</td><td class="num lg">10</td><td class="sum">24</td></tr>
+          <tr><td class="wk">6</td><td class="dt">24–30 авг</td><td class="num">6</td><td class="num">6</td><td class="num">4</td><td class="num lg">10</td><td class="sum">26</td></tr>
+          <tr><td class="wk">7</td><td class="dt">31 авг–6 сен</td><td class="num">6</td><td class="num">6</td><td class="num">5</td><td class="num lg">11</td><td class="sum">28</td></tr>
+          <tr class="deload"><td class="wk">8 <span class="tag dl">разгрузка</span></td><td class="dt">7–13 сен</td><td class="num">5</td><td class="num">5</td><td class="num">4</td><td class="num lg">8</td><td class="sum">22</td></tr>
+          <tr><td class="wk">9</td><td class="dt">14–20 сен</td><td class="num">6</td><td class="num">7</td><td class="num">5</td><td class="num lg">12</td><td class="sum">30</td></tr>
+          <tr><td class="wk">10</td><td class="dt">21–27 сен</td><td class="num">7</td><td class="num">7</td><td class="num">6</td><td class="num lg">12</td><td class="sum">32</td></tr>
+          <tr><td class="wk">11</td><td class="dt">28 сен–4 окт</td><td class="num">7</td><td class="num">8</td><td class="num">6</td><td class="num lg">13</td><td class="sum">34</td></tr>
+          <tr class="deload milestone"><td class="wk">12 <span class="tag dl">тест</span></td><td class="dt">5–11 окт</td><td class="num">6</td><td class="num">7</td><td class="num">5</td><td class="num lg">10</td><td class="sum">28</td></tr>
         </tbody>
       </table>
       </div>
+      <p class="tblnote">Все значения в километрах. «Итого» — сумма строки, недельный объём. Тест 5 км на 12-й неделе бежится вместо одной из лёгких.</p>
+
+      <div class="callout"><b>Почему лёгкие тоже растут.</b> Длинная не должна занимать больше трети недельного объёма. Если заморозить лёгкие на 6 км, то к 11-й неделе длинная 13 км составит 52 % недели — один забег, к которому остальные дни не готовят. Это прямой путь к травме. По плану выходит 38 % — длинная стоит на фундаменте из лёгких, а не заменяет его.</div>
 
       <div class="callout">Каждая 4-я неделя — <b>разгрузочная</b>, и это не опция: рост тела происходит в восстановлении, а не в нагрузке. Тест в конце (ждём ~25:30–26:00 по прохладе) покажет сдвиг формы — от него построим уже полумарафонный блок.</div>
+
+      <div class="callout hot"><b>Пока держится жара</b> — километры вторичны, считай по времени и пульсу. В духоте те же минуты дадут меньше километров, и это не откат: с приходом прохлады тот же пульс сам вернёт темп, и недельный объём догонит таблицу без дополнительных усилий.</div>
 
       <div class="callout warm"><b>Страйды по четвергам</b> (4×20 сек) — единственная «скорость» блока. Делаешь их в конце лёгкой, на разогретых ногах: ~85–90 % усилия, расслабленная быстрая частота шага, полный отдых 60 сек между. Держат нейромышечку живой, пока копим объём.</div>
     </section>
